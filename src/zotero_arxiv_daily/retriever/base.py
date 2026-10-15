@@ -33,8 +33,10 @@ class BaseRetriever(ABC):
                 continue
             if paper is not None:
                 papers.append(paper)
-            sleep(1)
+            if self.name != "arxiv" or self.config.llm.get("enabled", True):
+                sleep(1)
         return papers
+
 
 registered_retrievers = {}
 
